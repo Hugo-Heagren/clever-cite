@@ -1,0 +1,65 @@
+#+title: clever-cite.el
+
+This package provides a simple and extensible framework for killing
+text out of a buffer and inserting relevant quotation and citation
+markers when it is yanked into another buffer. You could kill this
+text from a PDF:
+
+#+begin_quote
+A possible-worlds semantic theory states the truth-conditions
+of sentences of a language containing modal operators in a
+metalanguage which dispenses with such operators in favour of
+explicit quantification over possible worlds.
+#+end_quote
+
+Put then when yanked into an Org buffer, get this:
+
+#+begin_src org
+,#+begin_quote
+A possible-worlds semantic theory states the truth-conditions
+of sentences of a language containing modal operators in a
+metalanguage which dispenses with such operators in favour of
+explicit quantification over possible worlds.
+
+[cite:@evans82_variet_refer 54]
+,#+end_quote
+#+end_src
+
+* Installation
+This package isn't available on GNU ELPA or MELPA, so you'll have to
+install it manually.
+
+* Usage
+- Use file-local variables, hooks or mode functions to automatically
+  ~clever-cite-cite-key~ and ~clever-cite-ref~.
+- Use mode hooks to set an appropriate value for
+  ~clever-cite-quote-function~ in each mode where you might input
+  quoted text. Common examples include LaTeX modes and Org mode.
+- Set ~kill-transform-function~ to ~clever-cite-kill-transform~ in all
+  modes/files/etc. from which you might want to kill text which can
+  later be yanked as a quote.
+
+* Examples
+The author's own Org mode configuration includes:
+
+#+begin_src elisp
+(defun my/org-clever-cite-quote-string (str cite-key &optional ref)
+  "Insert STR inside an org quote block, ending with a CITE-KEY citation.
+
+If REF is non-nil, inlude it in the citation. Fill the text with
+`org-fill-paragraph'."
+  (insert "#+begin_quote\n")
+  (let ((beg (point))
+	(end (progn (insert str "\n") (point))))
+    (save-mark-and-excursion
+      ;; Use Org's own filling machinery
+      (org-fill-paragraph))
+    (insert
+     (if cite-key
+	 (format "\n[cite:@%s%s]\n"
+		 cite-key
+		 (if ref (format " %s" ref) "")))
+     "#+end_quote\n"))
+  ;; Signal that we have handled insertion
+  t)
+#+end_src

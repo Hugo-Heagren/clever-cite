@@ -98,7 +98,9 @@ results in an error."
        ((stringp result) (insert result))
        ((eq result t) (error "it works!"))
        (error "Invalid return value from `clever-cite-quote-function' %s"
-	      clever-cite-quote-function))))
+	      clever-cite-quote-function))
+    ;; No special handling, just insert text
+    (insert str)))
 
 (defun clever-cite-kill-transform (str)
   "Propertize STR with cite-key and ref.

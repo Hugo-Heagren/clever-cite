@@ -46,9 +46,7 @@ which returns the key as a string.
 You probably don't want to set this variable explicitly from lisp,
 instead use a file-local variable, hook or mode function to set it
 automatically.")
-(put 'clever-cite-cite-key
-     'safe-local-variable
-     (lambda (val) (or (stringp val) (functionp val))))
+;;;###autoload(put 'clever-cite-cite-key 'safe-local-variable (lambda (val) (or (stringp val) (functionp val))))
 
 (defun clever-cite-get-cite-key ()
   (if (functionp clever-cite-cite-key)
@@ -63,9 +61,7 @@ no arguments which returns the reference or nil.
 
 You probably don't want to set this variable explicitly, instead use a
 file-local variable, hook or mode function to set it automatically.")
-(put 'clever-cite-ref
-     'safe-local-variable
-     (lambda (val) (or (stringp val) (functionp val))))
+;;;###autoload(put 'clever-cite-ref 'safe-local-variable (lambda (val) (or (stringp val) (functionp val))))
 
 (defun clever-cite-get-ref ()
   (if (functionp clever-cite-ref)

@@ -49,6 +49,7 @@ automatically.")
 ;;;###autoload(put 'clever-cite-cite-key 'safe-local-variable (lambda (val) (or (stringp val) (functionp val))))
 
 (defun clever-cite-get-cite-key ()
+  "Get the key for the current buffer."
   (if (functionp clever-cite-cite-key)
       (funcall clever-cite-cite-key)
     clever-cite-cite-key))

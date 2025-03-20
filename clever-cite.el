@@ -119,14 +119,5 @@ cite-key and ref are obtained by running `clever-cite-get-cite-key' and
     ;; Just return string unchanges
     str))
 
-(defun clever-cite-yank-transform (str)
-  (if-let* ((fun clever-cite-quote-function)
-	    (cite-key (get-text-property 0 'clever-cite-cite-key str)))
-      (funcall
-       fun
-       str (get-text-property 0 'clever-cite-ref str))
-    ;; No transformation function/cite-key -- just return string
-    str))
-
 (provide 'clever-cite)
 ;;; clever-cite.el ends here

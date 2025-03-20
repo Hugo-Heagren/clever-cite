@@ -108,7 +108,7 @@ results in an error."
 
 cite-key and ref are obtained by running `clever-cite-get-cite-key' and
 `clever-cite-get-ref' respectively."
-  (if-let ((cite-key (clever-cite-get-cite-key)))
+  (if-let* ((cite-key (clever-cite-get-cite-key)))
       (propertize
        str
        ;; Local value of variable

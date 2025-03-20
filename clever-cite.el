@@ -96,9 +96,10 @@ results in an error."
 		     (get-text-property 0 'clever-cite-ref str))))
       (cond
        ((stringp result) (insert result))
-       ((eq result t) (error "it works!"))
-       (error "Invalid return value from `clever-cite-quote-function' %s"
-	      clever-cite-quote-function))
+       ;; Insertion already handled, no need for further action
+       ((eq result t))
+       (t (error "Invalid return value from `clever-cite-quote-function' %s"
+	      clever-cite-quote-function)))
     ;; No special handling, just insert text
     (insert str)))
 

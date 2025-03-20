@@ -43,7 +43,7 @@
 Can be either a string (the key), or a function called with no arguments
 which returns the key as a string.
 
-You probably don't want to set this variable explicitly from lisp,
+You probably don't want to set this variable explicitly from Lisp,
 instead use a file-local variable, hook or mode function to set it
 automatically.")
 ;;;###autoload(put 'clever-cite-cite-key 'safe-local-variable (lambda (val) (or (stringp val) (functionp val))))

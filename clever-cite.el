@@ -65,6 +65,7 @@ file-local variable, hook or mode function to set it automatically.")
 ;;;###autoload(put 'clever-cite-ref 'safe-local-variable (lambda (val) (or (stringp val) (functionp val))))
 
 (defun clever-cite-get-ref ()
+  "Get the ref for the current buffer."
   (if (functionp clever-cite-ref)
       (funcall clever-cite-ref)
     clever-cite-ref))
